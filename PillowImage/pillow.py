@@ -4,8 +4,8 @@ from tempfile import NamedTemporaryFile
 from PIL import Image, ImageDraw, ImageFont
 from PyBundle import bundle_dir, resource_path
 
-from PillowImage.PillowImage.font import FONT
-from PillowImage.PillowImage.utils import img_adjust
+from PillowImage.font import FONT
+from PillowImage.utils import img_adjust
 
 
 class PillowImage:
@@ -198,7 +198,7 @@ class PillowImage:
 
     def save(self, img=None, destination=None, file_name='pil'):
         img = self.img if not img else img
-        fn = file_name.strip('.png') if '.png' in file_name else file_name
+        fn = file_name.replace('.png', '') if file_name.endswith('.png') else file_name
         if destination:
             output = os.path.join(destination, fn + '.png')
         elif self.tempdir:
