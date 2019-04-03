@@ -1,0 +1,3 @@
+Pillow==5.4.1
+PyBundle==1.0.6
+reportlab==3.5.13
