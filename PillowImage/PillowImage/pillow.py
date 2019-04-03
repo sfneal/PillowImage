@@ -4,8 +4,8 @@ from tempfile import NamedTemporaryFile
 from PIL import Image, ImageDraw, ImageFont
 from PyBundle import bundle_dir, resource_path
 
-from PillowImage.font import FONT
-from PillowImage.utils import img_adjust
+from PillowImage.PillowImage.font import FONT
+from PillowImage.PillowImage.utils import img_adjust
 
 
 class PillowImage:
