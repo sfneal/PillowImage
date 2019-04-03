@@ -1,6 +1,7 @@
 import os
 from tempfile import NamedTemporaryFile
-from PIL import Image, ImageEnhance, ImageDraw, ImageFont
+
+from PIL import Image, ImageEnhance
 
 
 def img_adjust(image, opacity=1.0, rotate=None, fit=0, tempdir=None, bw=False):

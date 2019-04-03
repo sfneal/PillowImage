@@ -1,10 +1,11 @@
 import os
 from tempfile import NamedTemporaryFile
-from PIL import Image, ImageEnhance, ImageDraw, ImageFont
+
+from PIL import Image, ImageDraw, ImageFont
 from PyBundle import bundle_dir, resource_path
 
-from PillowImage.utils import img_adjust
 from PillowImage._font import FONT
+from PillowImage.utils import img_adjust
 
 
 class PillowImage:
