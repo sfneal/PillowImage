@@ -1,4 +1,4 @@
-from PillowImage.font._font import FONT
+from PillowImage.font.register import FONT
 
 
 __all__ = ['FONT']
