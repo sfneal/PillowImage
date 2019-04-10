@@ -105,6 +105,36 @@ class TestPillowImage(unittest.TestCase):
         return d
 
     @Timer.decorator
+    def test_draw_img_resize_width(self):
+        """Draw text onto an image."""
+        width = 300
+        self.draw = PillowImage(img=self.img_path)
+        self.draw.resize_width(width)
+        d = self.draw.save(destination=test_data_dir, file_name='draw_img_resized_width')
+
+        # Assert file exists
+        self.assertTrue(os.path.exists(d))
+
+        # Assert actual longest edge is equal to target longest edge
+        self.assertEqual(width, self.draw.width)
+        return d
+
+    @Timer.decorator
+    def test_draw_img_resize_height(self):
+        """Draw text onto an image."""
+        height = 300
+        self.draw = PillowImage(img=self.img_path)
+        self.draw.resize_height(height)
+        d = self.draw.save(destination=test_data_dir, file_name='draw_img_resized_height')
+
+        # Assert file exists
+        self.assertTrue(os.path.exists(d))
+
+        # Assert actual longest edge is equal to target longest edge
+        self.assertEqual(height, self.draw.height)
+        return d
+
+    @Timer.decorator
     def test_rotate(self):
         """Draw text onto an image."""
         self.draw = PillowImage()

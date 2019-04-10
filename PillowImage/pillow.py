@@ -132,14 +132,20 @@ class PillowImage:
 
     def resize(self, longest_side):
         """Resize by specifying the longest side length."""
-        if self.width > self.height:
-            width_percent = (longest_side / float(self.width))
-            height_size = int((float(self.height)) * float(width_percent))
-            self.img = self.img.resize((longest_side, height_size), Image.ANTIALIAS)
-        else:
-            height_percent = (longest_side / float(self.height))
-            width_size = int((float(self.width) * float(height_percent)))
-            self.img = self.img.resize((width_size, longest_side), Image.ANTIALIAS)
+        return self.resize_width(longest_side) if self.width > self.height else self.resize_height(longest_side)
+
+    def resize_width(self, max_width):
+        """Adjust an images width while proportionately scaling height."""
+        width_percent = (max_width / float(self.width))
+        height_size = int((float(self.height)) * float(width_percent))
+        self.img = self.img.resize((max_width, height_size), Image.ANTIALIAS)
+        return self.img
+
+    def resize_height(self, max_height):
+        """Adjust an images height while proportionately scaling width."""
+        height_percent = (max_height / float(self.height))
+        width_size = int((float(self.width) * float(height_percent)))
+        self.img = self.img.resize((width_size, max_height), Image.ANTIALIAS)
         return self.img
 
     def draw_text(self, text, x='center', y=140, font=FONT, font_size=40, opacity=25):
