@@ -17,7 +17,19 @@ class PillowImage:
         else:
             # Create a black image
             self.img = Image.new('RGBA', size, color=(255, 255, 255, 0))  # 2200, 1700 for 200 DPI
-        self.tempdir = TemporaryDirectory()
+        self._tempdir = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.cleanup()
+
+    @property
+    def tempdir(self):
+        if not self._tempdir:
+            self._tempdir = TemporaryDirectory()
+        return self._tempdir
 
     @property
     def size(self):
