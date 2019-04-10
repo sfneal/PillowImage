@@ -10,11 +10,12 @@ from PillowImage.utils import img_adjust
 
 class PillowImage:
     def __init__(self, img=None, size=(792, 612), tempdir=None):
-        # Create a black image
         if img:
+            # Open img and convert to RGBA color space
             self.img = Image.open(img)
             self.img = self.img.convert('RGBA') if self.img.mode != 'RGBA' else self.img.copy()
         else:
+            # Create a black image
             self.img = Image.new('RGBA', size, color=(255, 255, 255, 0))  # 2200, 1700 for 200 DPI
         self.tempdir = tempdir
 
@@ -171,9 +172,10 @@ class PillowImage:
         :param scale_to_fit: When true, image is scaled to fit canvas size
         :return:
         """
-        image = Image.open(img_adjust(self.scale(img) if scale_to_fit else img, opacity, rotate, fit, self.tempdir))
-        x, y = self.image_bound(image, x, y)
-        self.img.alpha_composite(image, (x, y))
+        with Image.open(img_adjust(self.scale(img) if scale_to_fit else img,
+                                   opacity, rotate, fit, self.tempdir)) as image:
+            x, y = self.image_bound(image, x, y)
+            self.img.alpha_composite(image, (x, y))
 
     def rotate(self, rotate):
         # Create transparent image that is the same size as self.img
