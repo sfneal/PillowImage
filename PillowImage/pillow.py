@@ -1,5 +1,5 @@
 import os
-from tempfile import NamedTemporaryFile
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 from PIL import Image, ImageDraw, ImageFont
 from PyBundle import bundle_dir, resource_path
@@ -9,7 +9,7 @@ from PillowImage.utils import img_adjust
 
 
 class PillowImage:
-    def __init__(self, img=None, size=(792, 612), tempdir=None):
+    def __init__(self, img=None, size=(792, 612)):
         if img:
             # Open img and convert to RGBA color space
             self.img = Image.open(img)
@@ -17,7 +17,7 @@ class PillowImage:
         else:
             # Create a black image
             self.img = Image.new('RGBA', size, color=(255, 255, 255, 0))  # 2200, 1700 for 200 DPI
-        self.tempdir = tempdir
+        self.tempdir = TemporaryDirectory()
 
     @property
     def size(self):
@@ -173,7 +173,7 @@ class PillowImage:
         :return:
         """
         with Image.open(img_adjust(self.scale(img) if scale_to_fit else img,
-                                   opacity, rotate, fit, self.tempdir)) as image:
+                                   opacity, rotate, fit, self.tempdir.name)) as image:
             x, y = self.image_bound(image, x, y)
             self.img.alpha_composite(image, (x, y))
 
@@ -204,7 +204,7 @@ class PillowImage:
         if destination:
             output = os.path.join(destination, fn + '.png')
         elif self.tempdir:
-            tmpimg = NamedTemporaryFile(suffix='.png', dir=self.tempdir, delete=False)
+            tmpimg = NamedTemporaryFile(suffix='.png', dir=self.tempdir.name, delete=False)
             output = resource_path(tmpimg.name)
             tmpimg.close()
         else:
@@ -217,3 +217,7 @@ class PillowImage:
     def show(self):
         """Display a Pillow image on your operating system."""
         return self.img.show()
+
+    def cleanup(self):
+        """Implicitly delete temporary directories that have been created."""
+        self.tempdir.cleanup()
