@@ -113,7 +113,7 @@ class PillowImage:
 
         return calculator(x, self.width, self._img_centered_x), calculator(y, self.height, self._img_centered_x)
 
-    def scale(self, img, func='min', scale=None):
+    def scale_to_fit(self, img, func='min', scale=None):
         """Scale an image to fit the Pillow canvas."""
         im = img if isinstance(img, Image.Image) else Image.open(img)
 
@@ -184,7 +184,7 @@ class PillowImage:
         :param scale_to_fit: When true, image is scaled to fit canvas size
         :return:
         """
-        with Image.open(img_adjust(self.scale(img) if scale_to_fit else img,
+        with Image.open(img_adjust(self.scale_to_fit(img) if scale_to_fit else img,
                                    opacity, rotate, fit, self.tempdir.name)) as image:
             x, y = self.image_bound(image, x, y)
             self.img.alpha_composite(image, (x, y))
