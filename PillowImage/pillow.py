@@ -28,7 +28,7 @@ class PillowImage:
     @property
     def tempdir(self):
         if not self._tempdir:
-            self._tempdir = TemporaryDirectory()
+            self._tempdir = TemporaryDirectory(prefix='pillowimg_')
         return self._tempdir
 
     @property
