@@ -17,7 +17,7 @@ else:
 
 setup(
     install_requires=[
-        'reportlab>=3.5.13',
+        'reportlab>=3.5.19',
         'Pillow>=6.0.0',
         'PyBundle>=1.0.6',
     ],
