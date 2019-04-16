@@ -111,8 +111,8 @@ class PillowImage:
             else:
                 return int(value)
 
-        return abs(calculator(x, self.width, self._img_centered_x)), abs(calculator(y, self.height,
-                                                                                    self._img_centered_x))
+        return (abs(calculator(x, self.width, self._img_centered_x)),
+                abs(calculator(y, self.height, self._img_centered_y)))
 
     def scale_to_fit(self, img, func='min', scale=None):
         """Scale an image to fit the Pillow canvas."""
