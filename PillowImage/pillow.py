@@ -88,7 +88,6 @@ class PillowImage:
         If 'center' is found in x or y, a value that centers the image is calculated.
         If a x or y value is negative, values are calculated as that distance from the right/bottom.
 
-
         :param image: Image to-be pasted
         :param x:
         :param y:
