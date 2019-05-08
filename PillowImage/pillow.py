@@ -1,5 +1,6 @@
 import os
 from tempfile import NamedTemporaryFile, TemporaryDirectory
+from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 from PyBundle import bundle_dir, resource_path
@@ -13,7 +14,10 @@ class PillowImage:
         if img:
             # Open img and convert to RGBA color space
             self.img = Image.open(img)
-            self.img = self.img.convert('RGBA') if self.img.mode != 'RGBA' else self.img.copy()
+            if self.img.mode != 'RGBA' and Path(img).suffix == '.png':
+                self.img = self.img.convert('RGBA')
+            else:
+                self.img = self.img.copy()
         else:
             # Create a black image
             self.img = Image.new('RGBA', size, color=(255, 255, 255, 0))  # 2200, 1700 for 200 DPI
@@ -87,6 +91,7 @@ class PillowImage:
 
         If 'center' is found in x or y, a value that centers the image is calculated.
         If a x or y value is negative, values are calculated as that distance from the right/bottom.
+
 
         :param image: Image to-be pasted
         :param x:
@@ -218,15 +223,16 @@ class PillowImage:
 
     def save(self, img=None, destination=None, file_name='pil'):
         img = self.img if not img else img
-        fn = file_name.replace('.png', '') if file_name.endswith('.png') else file_name
+        path = Path(file_name)
+        ext = path.suffix if len(path.suffix) > 0 else '.png'
         if destination:
-            output = os.path.join(destination, fn + '.png')
+            output = os.path.join(destination, path.stem + ext)
         elif self.tempdir:
             tmpimg = NamedTemporaryFile(suffix='.png', dir=self.tempdir.name, delete=False)
             output = resource_path(tmpimg.name)
             tmpimg.close()
         else:
-            output = os.path.join(bundle_dir(), fn + '.png')
+            output = os.path.join(bundle_dir(), file_name + ext)
 
         # Save image file
         img.save(output)
