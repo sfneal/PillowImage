@@ -14,7 +14,7 @@ class PillowImage:
         if img:
             # Open img and convert to RGBA color space
             self.img = Image.open(img)
-            if self.img.mode != 'RGBA' and Path(img).suffix == '.png':
+            if self.img.mode != 'RGBA':
                 self.img = self.img.convert('RGBA')
             else:
                 self.img = self.img.copy()
