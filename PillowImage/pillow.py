@@ -231,12 +231,10 @@ class PillowImage:
         rotated.paste(front, (0, y_margin))
         self.img = rotated
 
-    def save(self, img=None, destination=None, file_name='pil'):
+    def save(self, img=None, destination=None, file_name='pil', ext='.png'):
         img = self.img if not img else img
-        path = Path(file_name)
-        ext = path.suffix if len(path.suffix) > 0 else '.png'
         if destination:
-            output = os.path.join(destination, path.stem + ext)
+            output = os.path.join(destination, Path(file_name).stem + ext)
         elif self.tempdir:
             tmpimg = NamedTemporaryFile(suffix='.png', dir=self.tempdir.name, delete=False)
             output = resource_path(tmpimg.name)
