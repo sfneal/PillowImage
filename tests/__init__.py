@@ -13,4 +13,4 @@ WTR_NAME = 'watermark.png'
 WTR_PATH = os.path.join(TEST_DATA_DIR, WTR_NAME)
 
 
-__all__ = ['IMG_PATH', 'WTR_PATH', 'TEST_DATA_DIR']
+__all__ = ['IMG_PATH', 'WTR_PATH', 'TEST_DATA_DIR', 'IMG_NAME_JPEG', 'IMG_PATH_JPEG']

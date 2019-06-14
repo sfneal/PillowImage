@@ -10,7 +10,7 @@ from tests import *
 class TestPillowImageJPEG(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.img_path = IMG_PATH
+        cls.img_path = IMG_PATH_JPEG
         cls.wtrmrk_path = WTR_PATH
         cls.pdf = None
 
