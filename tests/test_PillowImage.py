@@ -10,8 +10,8 @@ from tests import *
 class TestPillowImage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.img_path = img_path
-        cls.wtrmrk_path = wtr_path
+        cls.img_path = IMG_PATH
+        cls.wtrmrk_path = WTR_PATH
         cls.pdf = None
 
     def setUp(self):
@@ -26,7 +26,7 @@ class TestPillowImage(unittest.TestCase):
         self.draw = PillowImage()
         self.draw.draw_text('Here is the first text', y=10, opacity=50)
         self.draw.draw_text('Here is the second text', y=50, opacity=50)
-        d = self.draw.save(destination=test_data_dir, file_name='draw_text')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_text')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -38,7 +38,7 @@ class TestPillowImage(unittest.TestCase):
         self.draw = PillowImage()
         self.draw.draw_img(self.img_path)
         self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
-        d = self.draw.save(destination=test_data_dir, file_name='draw_img')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_img')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -49,7 +49,7 @@ class TestPillowImage(unittest.TestCase):
         """Draw text onto an image."""
         self.draw = PillowImage(img=self.img_path)
         self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
-        d = self.draw.save(destination=test_data_dir, file_name='draw_img_overlay')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_img_overlay')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -60,7 +60,7 @@ class TestPillowImage(unittest.TestCase):
         """Draw text onto an image."""
         self.draw = PillowImage(img=self.img_path)
         self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x='center', y='center')
-        d = self.draw.save(destination=test_data_dir, file_name='draw_img_centered')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_img_centered')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -71,7 +71,7 @@ class TestPillowImage(unittest.TestCase):
         """Draw text onto an image."""
         self.draw = PillowImage(img=self.img_path)
         self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=-2000, y=-2000)
-        d = self.draw.save(destination=test_data_dir, file_name='draw_img_negbound')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_img_negbound')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -82,7 +82,7 @@ class TestPillowImage(unittest.TestCase):
         """Draw text onto an image."""
         self.draw = PillowImage(img=self.img_path)
         self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=.5, y=.1)
-        d = self.draw.save(destination=test_data_dir, file_name='draw_img_percentage')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_img_percentage')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -95,7 +95,7 @@ class TestPillowImage(unittest.TestCase):
         self.draw = PillowImage(img=self.img_path)
         self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
         self.draw.resize(longest_side)
-        d = self.draw.save(destination=test_data_dir, file_name='draw_img_resized')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_img_resized')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -110,7 +110,7 @@ class TestPillowImage(unittest.TestCase):
         width = 300
         self.draw = PillowImage(img=self.img_path)
         self.draw.resize_width(width)
-        d = self.draw.save(destination=test_data_dir, file_name='draw_img_resized_width')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_img_resized_width')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -125,7 +125,7 @@ class TestPillowImage(unittest.TestCase):
         height = 300
         self.draw = PillowImage(img=self.img_path)
         self.draw.resize_height(height)
-        d = self.draw.save(destination=test_data_dir, file_name='draw_img_resized_height')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='draw_img_resized_height')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -140,7 +140,7 @@ class TestPillowImage(unittest.TestCase):
         self.draw = PillowImage()
         self.draw.draw_img(self.img_path)
         self.draw.rotate(30)
-        d = self.draw.save(destination=test_data_dir, file_name='rotate')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='rotate')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -151,7 +151,7 @@ class TestPillowImage(unittest.TestCase):
         """Draw text onto an image."""
         self.draw = PillowImage(img=self.img_path)
         size = self.draw.size
-        d = self.draw.save(destination=test_data_dir, file_name='size')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='size')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -166,7 +166,7 @@ class TestPillowImage(unittest.TestCase):
         """Draw text onto an image."""
         self.draw = PillowImage(img=self.img_path)
         width = self.draw.width
-        d = self.draw.save(destination=test_data_dir, file_name='width')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='width')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -180,7 +180,7 @@ class TestPillowImage(unittest.TestCase):
         """Draw text onto an image."""
         self.draw = PillowImage(img=self.img_path)
         height = self.draw.height
-        d = self.draw.save(destination=test_data_dir, file_name='height')
+        d = self.draw.save(destination=TEST_DATA_DIR, file_name='height')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -193,8 +193,8 @@ class TestPillowImage(unittest.TestCase):
 class TestPillowImageUtils(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.img_path = img_path
-        cls.wtrmrk_path = wtr_path
+        cls.img_path = IMG_PATH
+        cls.wtrmrk_path = WTR_PATH
         cls.pdf = None
 
     def setUp(self):
