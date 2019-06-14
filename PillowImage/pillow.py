@@ -51,6 +51,16 @@ class PillowImage:
         return self.size[1]
 
     @property
+    def mode(self):
+        """Return the images mode."""
+        return self.img.mode
+
+    @property
+    def correct_extension(self):
+        """Return the images mode."""
+        return '.jpg' if self.mode != 'RGBA' else '.png'
+
+    @property
     def longest_side(self):
         """Return the longest side value (width or height) of the image."""
         return max(self.height, self.width)
