@@ -128,8 +128,16 @@ class PillowImage:
         return (abs(calculator(x, self.width, self._img_centered_x)),
                 abs(calculator(y, self.height, self._img_centered_y)))
 
-    def scale_to_fit(self, img, func='min', scale=None):
-        """Scale an image to fit the Pillow canvas."""
+    def scale_to_fit(self, img, func='min', scale=None, multiplier=float(1)):
+        """
+        Scale an image to fit the Pillow canvas.
+
+        :param img: Image object
+        :param func: Scale calculation function
+        :param scale: Specific scale
+        :param multiplier: Value to multiple calculated scale by
+        :return:
+        """
         im = img if isinstance(img, Image.Image) else Image.open(img)
 
         # Use either the shortest edge (min) or the longest edge (max) to determine scale factor
@@ -138,6 +146,7 @@ class PillowImage:
                 scale = min(float(self.width / im.size[0]), float(self.height / im.size[1]))
             else:
                 scale = max(float(self.width / im.size[0]), float(self.height / im.size[1]))
+        scale = scale * multiplier
 
         im.thumbnail((int(im.size[0] * scale), int(im.size[1] * scale)))
 
@@ -189,7 +198,8 @@ class PillowImage:
         opacity = int(opacity * 100) if opacity < 1 else opacity
         d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
-    def draw_img(self, img, x='center', y='center', opacity=1.0, rotate=0, fit=1, scale_to_fit=True):
+    def draw_img(self, img, x='center', y='center', opacity=1.0, rotate=0, fit=1, scale_to_fit=True,
+                 scale_multiplier=float(1)):
         """
         Scale an image to fit the canvas then alpha composite paste the image.
 
@@ -203,9 +213,10 @@ class PillowImage:
         :param rotate: Rotation degrees
         :param fit: When true, expands image canvas size to fit rotated image
         :param scale_to_fit: When true, image is scaled to fit canvas size
+        :param scale_multiplier: Value to multiple calculated scale by
         :return:
         """
-        with Image.open(img_adjust(self.scale_to_fit(img) if scale_to_fit else img,
+        with Image.open(img_adjust(self.scale_to_fit(img, multiplier=scale_multiplier) if scale_to_fit else img,
                                    opacity, rotate, fit, self.tempdir.name)) as image:
             x, y = self.image_bound(image, x, y)
             self.img.alpha_composite(image, (x, y))
