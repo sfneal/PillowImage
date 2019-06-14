@@ -172,7 +172,7 @@ class TestPillowImageJPEG(unittest.TestCase):
         self.assertTrue(os.path.exists(d))
 
         # Assert image size is correct
-        self.assertTrue(width == 2706)
+        self.assertTrue(width == 4094)
         return d
 
     @Timer.decorator
@@ -186,7 +186,7 @@ class TestPillowImageJPEG(unittest.TestCase):
         self.assertTrue(os.path.exists(d))
 
         # Assert image size is correct
-        self.assertTrue(height == 2226)
+        self.assertTrue(height == 1317)
         return d
 
 
