@@ -158,7 +158,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
         # Assert image size is correct
         self.assertIsInstance(size, tuple)
-        self.assertTrue(size == (2706, 2226))
+        self.assertTrue(size == (4094, 1317))
         return d
 
     @Timer.decorator
