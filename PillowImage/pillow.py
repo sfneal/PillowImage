@@ -216,8 +216,8 @@ class PillowImage:
         :param scale_multiplier: Value to multiple calculated scale by
         :return:
         """
-        with Image.open(img_adjust(self.scale_to_fit(img, multiplier=scale_multiplier) if scale_to_fit else img,
-                                   opacity, rotate, fit, self.tempdir.name)) as image:
+        img = img_adjust(img,opacity, rotate, fit, self.tempdir.name)
+        with Image.open(self.scale_to_fit(img, multiplier=scale_multiplier) if scale_to_fit else img) as image:
             x, y = self.image_bound(image, x, y)
             self.img.alpha_composite(image, (x, y))
 
