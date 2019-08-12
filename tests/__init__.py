@@ -2,7 +2,7 @@ import os
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
-TEST_RESULTS_DIR = os.path.join(os.path.dirname(__file__), 'data')
+TEST_RESULTS_DIR = os.path.join(os.path.dirname(__file__), 'results')
 
 IMG_NAME = 'floor plan.png'
 IMG_PATH = os.path.join(TEST_DATA_DIR, IMG_NAME)
