@@ -29,7 +29,7 @@ def init_result_dir(sub_folder):
     folder = os.path.join(TEST_RESULTS_DIR, sub_folder)
     if os.path.isdir(folder):
         for f in os.listdir(folder):
-            os.remove(f)
+            os.remove(os.path.join(folder, f))
     else:
         os.mkdir(folder)
     return folder
