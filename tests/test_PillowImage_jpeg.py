@@ -16,19 +16,13 @@ class TestPillowImageJPEG(unittest.TestCase):
         cls.wtrmrk_path = WTR_PATH
         cls.pdf = None
 
-    def setUp(self):
-        self.draw = None
-
-    def tearDown(self):
-        self.draw.cleanup()
-
     @Timer.decorator
     def test_draw_text(self):
         """Draw text onto an image."""
-        self.draw = PillowImage()
-        self.draw.draw_text('Here is the first text', y=10, opacity=50)
-        self.draw.draw_text('Here is the second text', y=50, opacity=50)
-        d = self.draw.save(destination=self.result_dir, file_name='draw_text')
+        with PillowImage() as draw:
+            draw.draw_text('Here is the first text', y=10, opacity=50)
+            draw.draw_text('Here is the second text', y=50, opacity=50)
+            d = draw.save(destination=self.result_dir, file_name='draw_text')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -37,10 +31,10 @@ class TestPillowImageJPEG(unittest.TestCase):
     @Timer.decorator
     def test_draw_img(self):
         """Draw text onto an image."""
-        self.draw = PillowImage()
-        self.draw.draw_img(self.img_path)
-        self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
-        d = self.draw.save(destination=self.result_dir, file_name='draw_img')
+        with PillowImage() as draw:
+            draw.draw_img(self.img_path)
+            draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
+            d = draw.save(destination=self.result_dir, file_name='draw_img')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -49,9 +43,9 @@ class TestPillowImageJPEG(unittest.TestCase):
     @Timer.decorator
     def test_draw_img_overlay(self):
         """Draw text onto an image."""
-        self.draw = PillowImage(img=self.img_path)
-        self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
-        d = self.draw.save(destination=self.result_dir, file_name='draw_img_overlay')
+        with PillowImage(img=self.img_path) as draw:
+            draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
+            d = draw.save(destination=self.result_dir, file_name='draw_img_overlay')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -60,9 +54,9 @@ class TestPillowImageJPEG(unittest.TestCase):
     @Timer.decorator
     def test_draw_img_centered(self):
         """Draw text onto an image."""
-        self.draw = PillowImage(img=self.img_path)
-        self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x='center', y='center')
-        d = self.draw.save(destination=self.result_dir, file_name='draw_img_centered')
+        with PillowImage(img=self.img_path) as draw:
+            draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x='center', y='center')
+            d = draw.save(destination=self.result_dir, file_name='draw_img_centered')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -71,9 +65,9 @@ class TestPillowImageJPEG(unittest.TestCase):
     @Timer.decorator
     def test_draw_img_negbound(self):
         """Draw text onto an image."""
-        self.draw = PillowImage(img=self.img_path)
-        self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=-2000, y=-2000)
-        d = self.draw.save(destination=self.result_dir, file_name='draw_img_negbound')
+        with PillowImage(img=self.img_path) as draw:
+            draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=-2000, y=-2000)
+            d = draw.save(destination=self.result_dir, file_name='draw_img_negbound')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -82,9 +76,9 @@ class TestPillowImageJPEG(unittest.TestCase):
     @Timer.decorator
     def test_draw_img_percentage(self):
         """Draw text onto an image."""
-        self.draw = PillowImage(img=self.img_path)
-        self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=.5, y=.1)
-        d = self.draw.save(destination=self.result_dir, file_name='draw_img_percentage')
+        with PillowImage(img=self.img_path) as draw:
+            draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=.5, y=.1)
+            d = draw.save(destination=self.result_dir, file_name='draw_img_percentage')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -94,55 +88,55 @@ class TestPillowImageJPEG(unittest.TestCase):
     def test_draw_img_resized(self):
         """Draw text onto an image."""
         longest_side = 500
-        self.draw = PillowImage(img=self.img_path)
-        self.draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
-        self.draw.resize(longest_side)
-        d = self.draw.save(destination=self.result_dir, file_name='draw_img_resized')
+        with PillowImage(img=self.img_path) as draw:
+            draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
+            draw.resize(longest_side)
+            d = draw.save(destination=self.result_dir, file_name='draw_img_resized')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
 
         # Assert actual longest edge is equal to target longest edge
-        self.assertEqual(longest_side, self.draw.longest_side)
+        self.assertEqual(longest_side, draw.longest_side)
         return d
 
     @Timer.decorator
     def test_draw_img_resize_width(self):
         """Draw text onto an image."""
         width = 300
-        self.draw = PillowImage(img=self.img_path)
-        self.draw.resize_width(width)
-        d = self.draw.save(destination=self.result_dir, file_name='draw_img_resized_width')
+        with PillowImage(img=self.img_path) as draw:
+            draw.resize_width(width)
+            d = draw.save(destination=self.result_dir, file_name='draw_img_resized_width')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
 
         # Assert actual longest edge is equal to target longest edge
-        self.assertEqual(width, self.draw.width)
+        self.assertEqual(width, draw.width)
         return d
 
     @Timer.decorator
     def test_draw_img_resize_height(self):
         """Draw text onto an image."""
         height = 300
-        self.draw = PillowImage(img=self.img_path)
-        self.draw.resize_height(height)
-        d = self.draw.save(destination=self.result_dir, file_name='draw_img_resized_height')
+        with PillowImage(img=self.img_path) as draw:
+            draw.resize_height(height)
+            d = draw.save(destination=self.result_dir, file_name='draw_img_resized_height')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
 
         # Assert actual longest edge is equal to target longest edge
-        self.assertEqual(height, self.draw.height)
+        self.assertEqual(height, draw.height)
         return d
 
     @Timer.decorator
     def test_rotate(self):
         """Draw text onto an image."""
-        self.draw = PillowImage()
-        self.draw.draw_img(self.img_path)
-        self.draw.rotate(30)
-        d = self.draw.save(destination=self.result_dir, file_name='rotate')
+        with PillowImage() as draw:
+            draw.draw_img(self.img_path)
+            draw.rotate(30)
+            d = draw.save(destination=self.result_dir, file_name='rotate')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -151,9 +145,9 @@ class TestPillowImageJPEG(unittest.TestCase):
     @Timer.decorator
     def test_size(self):
         """Draw text onto an image."""
-        self.draw = PillowImage(img=self.img_path)
-        size = self.draw.size
-        d = self.draw.save(destination=self.result_dir, file_name='size')
+        with PillowImage(img=self.img_path) as draw:
+            size = draw.size
+            d = draw.save(destination=self.result_dir, file_name='size')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -166,9 +160,9 @@ class TestPillowImageJPEG(unittest.TestCase):
     @Timer.decorator
     def test_width(self):
         """Draw text onto an image."""
-        self.draw = PillowImage(img=self.img_path)
-        width = self.draw.width
-        d = self.draw.save(destination=self.result_dir, file_name='width')
+        with PillowImage(img=self.img_path) as draw:
+            width = draw.width
+            d = draw.save(destination=self.result_dir, file_name='width')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
@@ -180,9 +174,9 @@ class TestPillowImageJPEG(unittest.TestCase):
     @Timer.decorator
     def test_height(self):
         """Draw text onto an image."""
-        self.draw = PillowImage(img=self.img_path)
-        height = self.draw.height
-        d = self.draw.save(destination=self.result_dir, file_name='height')
+        with PillowImage(img=self.img_path) as draw:
+            height = draw.height
+            d = draw.save(destination=self.result_dir, file_name='height')
 
         # Assert file exists
         self.assertTrue(os.path.exists(d))
