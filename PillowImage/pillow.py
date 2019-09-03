@@ -10,7 +10,15 @@ from PillowImage.utils import img_adjust
 
 
 class PillowImage:
-    def __init__(self, img=None, size=(792, 612)):
+    def __init__(self, img=None, size=(792, 612), mode='RGBA', color=(255, 255, 255, 0)):
+        """
+        Construct an image composition using Pillow.
+
+        :param img: Image path
+        :param size: Size of new image (if img is None)
+        :param mode: Mode of the new image (if img is None)
+        :param color: Color of the new image (if img is None)
+        """
         if img:
             # Open img and convert to RGBA color space
             self.img = Image.open(img)
@@ -20,7 +28,7 @@ class PillowImage:
                 self.img = self.img.copy()
         else:
             # Create a black image
-            self.img = Image.new('RGBA', size, color=(255, 255, 255, 0))  # 2200, 1700 for 200 DPI
+            self.img = Image.new(mode, size, color=color)  # 2200, 1700 for 200 DPI
         self._tempdir = None
 
     def __enter__(self):
