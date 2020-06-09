@@ -18,7 +18,7 @@ else:
 setup(
     install_requires=[
         'reportlab>=3.5.19',
-        'Pillow>=6.1.0',
+        'Pillow>=7.0',
         'PyBundle>=1.0.6',
     ],
     name='PillowImage',
