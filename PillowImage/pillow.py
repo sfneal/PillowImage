@@ -150,7 +150,7 @@ class PillowImage:
 
         # Use either the shortest edge (min) or the longest edge (max) to determine scale factor
         if not scale:
-            if func is 'min':
+            if func == 'min':
                 scale = min(float(self.width / im.size[0]), float(self.height / im.size[1]))
             else:
                 scale = max(float(self.width / im.size[0]), float(self.height / im.size[1]))
