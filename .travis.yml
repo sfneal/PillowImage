@@ -1,5 +1,9 @@
 language: python
 
+os: linux
+
+arch: arm64-graviton2
+
 python:
   - 3.6
   - 3.7
