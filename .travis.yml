@@ -1,9 +1,5 @@
 language: python
 
-os: linux
-
-arch: arm64-graviton2
-
 cache:
   pip: true
   directories:
