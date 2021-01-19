@@ -4,6 +4,11 @@ os: linux
 
 arch: arm64-graviton2
 
+cache:
+  pip: true
+  directories:
+    - $HOME/.cache/pip
+
 python:
   - 3.6
   - 3.7
