@@ -9,7 +9,7 @@ from tests import *
 
 class TestPillowImagePNG(unittest.TestCase):
     result_dir = init_result_dir('png')
-    
+
     @classmethod
     def setUpClass(cls):
         cls.img_path = IMG_PATH

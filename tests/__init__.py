@@ -1,6 +1,5 @@
 import os
 
-
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
 TEST_RESULTS_DIR = os.path.join(os.path.dirname(__file__), 'results')
 
@@ -35,5 +34,6 @@ def init_result_dir(sub_folder):
     return folder
 
 
-__all__ = ['IMG_PATH', 'WTR_PATH', 'TEST_DATA_DIR', 'TEST_RESULTS_DIR', 'IMG_NAME_JPEG', 'IMG_PATH_JPEG',
-           'init_result_dir']
+__all__ = [
+    'IMG_PATH', 'WTR_PATH', 'TEST_DATA_DIR', 'TEST_RESULTS_DIR', 'IMG_NAME_JPEG', 'IMG_PATH_JPEG', 'init_result_dir'
+]
