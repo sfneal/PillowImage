@@ -18,7 +18,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_text(self):
-        """Draw text onto an image."""
+        """Draw text onto a black canvas."""
         with PillowImage() as draw:
             draw.draw_text('Here is the first text', y=10, opacity=50)
             draw.draw_text('Here is the second text', y=50, opacity=50)
@@ -30,7 +30,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_img(self):
-        """Draw text onto an image."""
+        """Draw text and an image onto a black canvas."""
         with PillowImage() as draw:
             draw.draw_img(self.img_path)
             draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
@@ -42,7 +42,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_img_overlay(self):
-        """Draw text onto an image."""
+        """Overlay text onto an image."""
         with PillowImage(img=self.img_path) as draw:
             draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
             d = draw.save(destination=self.result_dir, file_name='draw_img_overlay')
@@ -53,7 +53,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_img_centered(self):
-        """Draw text onto an image."""
+        """Draw centered text onto an image."""
         with PillowImage(img=self.img_path) as draw:
             draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x='center', y='center')
             d = draw.save(destination=self.result_dir, file_name='draw_img_centered')
@@ -64,7 +64,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_img_negbound(self):
-        """Draw text onto an image."""
+        """Draw text onto an image with a negative bound."""
         with PillowImage(img=self.img_path) as draw:
             draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=-2000, y=-2000)
             d = draw.save(destination=self.result_dir, file_name='draw_img_negbound')
@@ -75,7 +75,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_img_percentage(self):
-        """Draw text onto an image."""
+        """Draw text onto an image based on percentage."""
         with PillowImage(img=self.img_path) as draw:
             draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30, x=.5, y=.1)
             d = draw.save(destination=self.result_dir, file_name='draw_img_percentage')
@@ -86,7 +86,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_img_resized(self):
-        """Draw text onto an image."""
+        """Draw text onto a resized image."""
         longest_side = 500
         with PillowImage(img=self.img_path) as draw:
             draw.draw_img(self.wtrmrk_path, opacity=0.08, rotate=30)
@@ -102,7 +102,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_img_resize_width(self):
-        """Draw text onto an image."""
+        """Draw text onto a horizontally resized image."""
         width = 300
         with PillowImage(img=self.img_path) as draw:
             draw.resize_width(width)
@@ -117,7 +117,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_draw_img_resize_height(self):
-        """Draw text onto an image."""
+        """Draw text onto a vertically resized image."""
         height = 300
         with PillowImage(img=self.img_path) as draw:
             draw.resize_height(height)
@@ -132,7 +132,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_rotate(self):
-        """Draw text onto an image."""
+        """Draw a rotated image."""
         with PillowImage() as draw:
             draw.draw_img(self.img_path)
             draw.rotate(30)
@@ -144,7 +144,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_size(self):
-        """Draw text onto an image."""
+        """Draw text onto an image with a modified size."""
         with PillowImage(img=self.img_path) as draw:
             size = draw.size
             d = draw.save(destination=self.result_dir, file_name='size')
@@ -159,7 +159,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_width(self):
-        """Draw text onto an image."""
+        """Test the width of an image."""
         with PillowImage(img=self.img_path) as draw:
             width = draw.width
             d = draw.save(destination=self.result_dir, file_name='width')
@@ -173,7 +173,7 @@ class TestPillowImageJPEG(unittest.TestCase):
 
     @Timer.decorator
     def test_height(self):
-        """Draw text onto an image."""
+        """Test the height of an image."""
         with PillowImage(img=self.img_path) as draw:
             height = draw.height
             d = draw.save(destination=self.result_dir, file_name='height')
