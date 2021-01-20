@@ -6,6 +6,7 @@
 [![PyPi downloads per month](https://img.shields.io/pypi/dm/PillowImage)](https://pypi.org/project/PillowImage)
 [![PyPi license](https://img.shields.io/pypi/l/PillowImage)](https://pypi.org/project/PillowImage)
 [![StyleCI](https://github.styleci.io/repos/179334000/shield?branch=master)](https://github.styleci.io/repos/179334000?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sfneal/PillowImage/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sfneal/PillowImage/?branch=master)
 
 Pillow wrapper for quick image alterations.
 
