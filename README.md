@@ -5,6 +5,7 @@
 [![PyPi Python support](https://img.shields.io/pypi/pyversions/PillowImage)](https://pypi.org/project/PillowImage)
 [![PyPi downloads per month](https://img.shields.io/pypi/dm/PillowImage)](https://pypi.org/project/PillowImage)
 [![PyPi license](https://img.shields.io/pypi/l/PillowImage)](https://pypi.org/project/PillowImage)
+[![StyleCI](https://github.styleci.io/repos/179334000/shield?branch=master)](https://github.styleci.io/repos/179334000?branch=master)
 
 Pillow wrapper for quick image alterations.
 
