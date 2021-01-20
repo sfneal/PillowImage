@@ -28,7 +28,7 @@ class PillowImage:
                 self.img = self.img.copy()
         else:
             # Create a black image
-            self.img = Image.new(mode, size, color=color)  # 2200, 1700 for 200 DPI
+            self.img = Image.new(mode, size, color=color)    # 2200, 1700 for 200 DPI
         self._tempdir = None
 
     def __enter__(self):
@@ -116,7 +116,6 @@ class PillowImage:
         :param y:
         :return: X and Y values
         """
-
         def calculator(value, img_size, center_func):
             """Helper function to perform bound calculations for either x or y values."""
             # Center the image
@@ -133,8 +132,8 @@ class PillowImage:
             else:
                 return int(value)
 
-        return (abs(calculator(x, self.width, self._img_centered_x)),
-                abs(calculator(y, self.height, self._img_centered_y)))
+        return (abs(calculator(x, self.width,
+                               self._img_centered_x)), abs(calculator(y, self.height, self._img_centered_y)))
 
     def scale_to_fit(self, img, func='min', scale=None, multiplier=float(1)):
         """
@@ -196,7 +195,7 @@ class PillowImage:
         d = ImageDraw.Draw(self.img)
 
         # Set a font
-        fnt = ImageFont.truetype(font, int(font_size * 1.00))  # multiply size of font if needed
+        fnt = ImageFont.truetype(font, int(font_size * 1.00))    # multiply size of font if needed
 
         # Check if x or y is set to 'center'
         x = self._text_centered_x(text, d, fnt) if 'center' in str(x).lower() else x
@@ -206,7 +205,14 @@ class PillowImage:
         opacity = int(opacity * 100) if opacity < 1 else opacity
         d.text((x, y), text, font=fnt, fill=(0, 0, 0, opacity))
 
-    def draw_img(self, img, x='center', y='center', opacity=1.0, rotate=0, fit=1, scale_to_fit=True,
+    def draw_img(self,
+                 img,
+                 x='center',
+                 y='center',
+                 opacity=1.0,
+                 rotate=0,
+                 fit=1,
+                 scale_to_fit=True,
                  scale_multiplier=float(1)):
         """
         Scale an image to fit the canvas then alpha composite paste the image.
@@ -224,7 +230,7 @@ class PillowImage:
         :param scale_multiplier: Value to multiple calculated scale by
         :return:
         """
-        img = img_adjust(img,opacity, rotate, fit, self.tempdir.name)
+        img = img_adjust(img, opacity, rotate, fit, self.tempdir.name)
         with Image.open(self.scale_to_fit(img, multiplier=scale_multiplier) if scale_to_fit else img) as image:
             x, y = self.image_bound(image, x, y)
             self.img.alpha_composite(image, (x, y))
