@@ -30,7 +30,7 @@ setup(
     python_requires='>=3.6',
     install_requires=[
         'reportlab>=3.5.19',
-        'Pillow>=7.0',
+        'Pillow>=9.0',
         'PyBundle>=1.0.6',
     ],
     include_package_data=True,
