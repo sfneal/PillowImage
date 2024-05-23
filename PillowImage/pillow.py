@@ -83,7 +83,7 @@ class PillowImage:
         :return: X coordinate value
         """
         # ('Page Width' - 'Text Width') / 2
-        return (self.width - drawing.textsize(text, font=font_type)[0]) / 2
+        return (self.width - drawing.textlength(text, font=font_type)) / 2
 
     def _text_centered_y(self, font_size):
         """
@@ -169,14 +169,14 @@ class PillowImage:
         """Adjust an images width while proportionately scaling height."""
         width_percent = (max_width / float(self.width))
         height_size = int((float(self.height)) * float(width_percent))
-        self.img = self.img.resize((max_width, height_size), Image.ANTIALIAS)
+        self.img = self.img.resize((max_width, height_size), Image.LANCZOS)
         return self.img
 
     def resize_height(self, max_height):
         """Adjust an images height while proportionately scaling width."""
         height_percent = (max_height / float(self.height))
         width_size = int((float(self.width) * float(height_percent)))
-        self.img = self.img.resize((width_size, max_height), Image.ANTIALIAS)
+        self.img = self.img.resize((width_size, max_height), Image.LANCZOS)
         return self.img
 
     def draw_text(self, text, x='center', y=140, font=FONT, font_size=40, opacity=25):
