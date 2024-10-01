@@ -3,4 +3,4 @@ looptools==1.2.4
 Pillow==9.5.0; python_version <= "3.8"
 pillow==10.4.0; python_version >= "3.9"
 PyBundle==1.0.6
-reportlab==4.2.2
+reportlab==4.2.4
