@@ -27,7 +27,7 @@ setup(
     name=NAME,
     version=get_version(NAME),
     packages=find_packages(),
-    python_requires='>=3.6',
+    python_requires='>=3.8',
     install_requires=[
         'reportlab>=3.5.19',
         'Pillow>=9.0',
